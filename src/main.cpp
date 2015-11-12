@@ -13,6 +13,9 @@ int main( int argc, char* args[] )
     while ( game->running ) {
         game->update();
     }
-
+    
+    delete engine;
+    delete game;
+    SDL_Quit();
     return 0;
 }

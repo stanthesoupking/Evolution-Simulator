@@ -1,14 +1,12 @@
 #include <CRenderer.h>
 
-CRenderer::CRenderer( int _sWidth, int _sHeight ) {
-    sWidth = _sWidth;
-    sHeight = _sHeight;
+CRenderer::CRenderer( SDL_Window* _window ) {
+    window = _window;
 
-	vSurface = NULL;
-	vSurface = SDL_SetVideoMode( sWidth, sHeight, 32, SDL_SWSURFACE ); //Create display surface
-
-	if (vSurface == NULL) {
-		//std::cout << "Error: SDL failed to create display surface.";
+	renderer = NULL;
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+	if (renderer == NULL) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "SDL failed to create renderer.", NULL);
 		SDL_Quit();
 	}
 }
@@ -17,7 +15,12 @@ CRenderer::~CRenderer( void ) {
 	
 }
 
-void CRenderer::update() {
-	//Update Display
-    SDL_Flip( vSurface );
+void CRenderer::clear() {
+	//Update Renderer
+    SDL_RenderClear(renderer);
+}
+
+void CRenderer::present() {
+    //Present Renderer
+    SDL_RenderPresent(renderer);
 }

@@ -7,7 +7,7 @@ CFLAGS=-I$(IDIR)
 SRC=src
 LDIR =lib
 
-LIBS=-lSDL -lstdc++
+LIBS=-lSDL2 -lstdc++
 
 _DEPS = CEngine.h CRenderer.h CGame.h
 DEPS = $(patsubst %,$(SRC)/%,$(_DEPS))

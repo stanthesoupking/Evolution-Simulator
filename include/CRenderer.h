@@ -1,14 +1,15 @@
 #pragma once
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 class CRenderer
 {
   private:
-    int sWidth, sHeight;   //Window Dimensions
-    SDL_Surface* vSurface; //Video Surface
+    SDL_Window* window;     //Main Window
+    SDL_Renderer* renderer; //Main Renderer
   public:
-    CRenderer( int _sWidth, int _sHeight );
+    CRenderer( SDL_Window* _window );
     ~CRenderer();
 
-    void update();
+    void clear();
+    void present();
 };

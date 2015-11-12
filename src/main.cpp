@@ -17,5 +17,6 @@ int main( int argc, char* args[] )
     delete engine;
     delete game;
     SDL_Quit();
+
     return 0;
 }

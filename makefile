@@ -9,10 +9,10 @@ LDIR =lib
 
 LIBS=-lSDL2 -lstdc++
 
-_DEPS = CEngine.h CRenderer.h CGame.h
+_DEPS = CEngine.h CRenderer.h CColor.h COrganism.h CGame.h
 DEPS = $(patsubst %,$(SRC)/%,$(_DEPS))
 
-_OBJ = main.cpp CEngine.cpp CRenderer.cpp CGame.cpp
+_OBJ = main.cpp CEngine.cpp CRenderer.cpp COrganism.cpp CColor.cpp CGame.cpp
 OBJ = $(patsubst %,$(SRC)/%,$(_OBJ))
 
 

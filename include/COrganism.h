@@ -7,7 +7,7 @@ class COrganism
   public:
     COrganism( CVector3 _position, CColor* _color );
     ~COrganism();
-    void update();
+    void update( double deltaTime );
     
     CColor* getColor();
     void setColor( CColor* _color );

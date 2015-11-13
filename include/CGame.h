@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include <ctime>
 #include <SDL2/SDL.h>
 #include "CEngine.h"
 #include "CRenderer.h"
@@ -7,6 +8,7 @@
 #include "CColor.h"
 #include "COrganism.h"
 #include "CVector3.h"
+
 
 class CGame
 {
@@ -20,6 +22,8 @@ class CGame
     CVector3 cameraPos;
 
     void doEvents();
+
+    long pTime;
   public:
     CGame( CEngine* _engine );
     ~CGame();

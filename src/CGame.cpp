@@ -12,6 +12,8 @@ CGame::CGame( CEngine* _engine ) {
     cameraPos = CVector3(0,0,0);
 
     running = false;
+
+    pTime = SDL_GetTicks();
 }
 
 CGame::~CGame() {
@@ -38,11 +40,16 @@ void CGame::update() {
     renderer->clear();
 
     std::vector<COrganism*>* organisms = world->getOrganisms();
+    
+    long cTime = SDL_GetTicks();
+
+    double deltaTime = (pTime - cTime) / 1000.0; //Delta Time in Milliseconds
+    pTime = cTime;
 
     //Do rendering
     for(int i = 0; i < organisms->size(); i++) {
         COrganism* organism = organisms->at(i);
-        organism->update();
+        organism->update(deltaTime);
         renderer->renderOrganism(organism, cameraPos);
     }
 

@@ -9,7 +9,7 @@ COrganism::~COrganism() {
     
 }
 
-void COrganism::update() {
+void COrganism::update( double deltaTime ) {
     //Do organism actions here
 }
 

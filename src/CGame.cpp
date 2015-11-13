@@ -13,7 +13,7 @@ CGame::CGame( CEngine* _engine ) {
 
     running = false;
 
-    pTime = SDL_GetTicks();
+    pTime = SDL_GetTicks(); //TODO: Make this non-SDL dependant
 }
 
 CGame::~CGame() {
@@ -41,7 +41,7 @@ void CGame::update() {
 
     std::vector<COrganism*>* organisms = world->getOrganisms();
     
-    long cTime = SDL_GetTicks();
+    long cTime = SDL_GetTicks(); //TODO: Make this non-SDL dependant
 
     double deltaTime = (pTime - cTime) / 1000.0; //Delta Time in Milliseconds
     pTime = cTime;

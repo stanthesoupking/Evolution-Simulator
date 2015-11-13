@@ -41,7 +41,9 @@ void CGame::update() {
 
     //Do rendering
     for(int i = 0; i < organisms->size(); i++) {
-        renderer->renderOrganism(organisms->at(i), cameraPos);
+        COrganism* organism = organisms->at(i);
+        organism->update();
+        renderer->renderOrganism(organism, cameraPos);
     }
 
     renderer->present();

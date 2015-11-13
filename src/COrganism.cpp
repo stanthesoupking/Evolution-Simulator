@@ -10,7 +10,7 @@ COrganism::~COrganism() {
 }
 
 void COrganism::update() {
-    
+    //Do organism actions here
 }
 
 CColor* COrganism::getColor() {

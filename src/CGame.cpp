@@ -3,7 +3,14 @@
 CGame::CGame( CEngine* _engine ) {
     engine = _engine;
     renderer = engine->getRenderer();
-    running = new bool;
+    
+    testOrganism = new COrganism( CVector3(128,128,0), new CColor(255,0,0) );
+
+    world = new CWorld();
+    world->addOrganism( testOrganism );
+    
+    cameraPos = CVector3(0,0,0);
+
     running = false;
 }
 
@@ -30,7 +37,12 @@ void CGame::update() {
 
     renderer->clear();
 
+    std::vector<COrganism*>* organisms = world->getOrganisms();
+
     //Do rendering
+    for(int i = 0; i < organisms->size(); i++) {
+        renderer->renderOrganism(organisms->at(i), cameraPos);
+    }
 
     renderer->present();
 }

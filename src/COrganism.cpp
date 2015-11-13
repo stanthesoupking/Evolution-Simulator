@@ -12,3 +12,7 @@ COrganism::~COrganism() {
 void COrganism::update() {
     
 }
+
+CColor* COrganism::getColor() {
+    return color;
+}

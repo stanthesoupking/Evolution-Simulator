@@ -43,7 +43,7 @@ void CGame::update() {
     
     long cTime = SDL_GetTicks(); //TODO: Make this non-SDL dependant
 
-    double deltaTime = (pTime - cTime) / 1000.0; //Delta Time in Milliseconds
+    double deltaTime = (pTime - cTime) / 1000.0; //Delta Time in Seconds
     pTime = cTime;
 
     //Do rendering

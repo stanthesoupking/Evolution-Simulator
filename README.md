@@ -2,7 +2,7 @@
 Version 0.0.1
 Written in C++ and SDL2.
 # Compiling
-To compile on Windows you need MinGW and then you should be able to run "make" as usual. You will need to have installed SDL.
+To compile on Windows you need MinGW and then you should be able to run "make" as usual. You will need to have installed SDL2.
 
     make
 

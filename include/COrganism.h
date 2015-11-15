@@ -1,6 +1,10 @@
 #pragma once
+#include <vector>
 #include "CColor.h"
 #include "CVector3.h"
+#include "CBehaviour.h"
+
+class CStimulus; //Forward Declaration
 
 class COrganism
 {
@@ -17,4 +21,8 @@ class COrganism
     float energy;
     float health;
     CColor* color;
+
+    std::vector< CStimulus* > stimuli;
 };
+
+#include "CStimulus.h"

@@ -13,10 +13,13 @@ class CStimulus
     CStimulus( COrganism* _self, CWorld* _world );
     CStimulus( CWorld* _world );
     ~CStimulus();
+    
+    virtual void setParam() = 0;
 
     void setOwner( COrganism* _self );
+    COrganism* getOwner();
 
-    virtual bool isActive();
+    virtual bool isActive() = 0;
     void update();
 
     void addBehaviour( CBehaviour* behaviour );

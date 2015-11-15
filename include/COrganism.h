@@ -12,6 +12,7 @@ class COrganism
     ~COrganism();
     void update( double deltaTime );
     
+    float getEnergy();
     CColor* getColor();
     void setColor( CColor* _color );
 

@@ -3,6 +3,8 @@
 COrganism::COrganism( CVector3 _position, CColor* _color ) {
     position = _position;
     color = _color;
+    
+    energy = 100;
 
     stimuli = new std::vector< CStimulus* >();
 }
@@ -26,4 +28,8 @@ CColor* COrganism::getColor() {
 void COrganism::addStimulus( CStimulus* stimulus ) {
     stimulus->setOwner(this);
     stimuli->push_back(stimulus);
+}
+
+float COrganism::getEnergy() {
+    return energy;
 }

@@ -18,6 +18,10 @@ void CStimulus::setOwner( COrganism* _self ) {
     self = _self;
 }
 
+COrganism* CStimulus::getOwner() {
+    return self;
+}
+
 void CStimulus::addBehaviour( CBehaviour* behaviour ) {
     behaviours->push_back(behaviour);
 }

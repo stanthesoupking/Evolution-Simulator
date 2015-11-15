@@ -2,7 +2,6 @@
 #include <vector>
 #include "CColor.h"
 #include "CVector3.h"
-#include "CBehaviour.h"
 
 class CStimulus; //Forward Declaration
 
@@ -17,12 +16,14 @@ class COrganism
     void setColor( CColor* _color );
 
     CVector3 position;
+
+    void addStimulus( CStimulus* stimulus );
   private:
     float energy;
     float health;
     CColor* color;
 
-    std::vector< CStimulus* > stimuli;
+    std::vector< CStimulus* >* stimuli;
 };
 
 #include "CStimulus.h"

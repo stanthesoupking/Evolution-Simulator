@@ -1,4 +1,5 @@
 #pragma once
+#include "COrganism.h"
 
 class CBehaviour
 {
@@ -7,4 +8,6 @@ class CBehaviour
   public:
     CBehaviour();
     ~CBehaviour();
+
+    void perform( COrganism* self );
 };

@@ -10,20 +10,17 @@ class CWorld;
 class CStimulus
 {
   public:
-    CStimulus( COrganism* _self, CWorld* _world );
     CStimulus( CWorld* _world );
     ~CStimulus();
     
-    virtual void setParam() = 0;
+    virtual void setParam();
 
     void setOwner( COrganism* _self );
-    COrganism* getOwner();
 
-    virtual bool isActive() = 0;
+    virtual bool isActive();
     void update();
 
     void addBehaviour( CBehaviour* behaviour );
-  private:
     COrganism* self;
     CWorld* world;
 

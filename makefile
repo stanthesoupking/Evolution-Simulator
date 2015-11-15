@@ -2,7 +2,7 @@ all: executable
 
 IDIR =include
 CC=gcc
-CFLAGS=-I$(IDIR)
+CFLAGS=-I$(IDIR) -std=c++11
 
 SRC=src
 LDIR =lib

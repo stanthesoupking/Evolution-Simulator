@@ -8,6 +8,7 @@
 #include "CColor.h"
 #include "COrganism.h"
 #include "CVector3.h"
+#include "base_stimuli.h"
 
 
 class CGame

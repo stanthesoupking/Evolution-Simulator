@@ -7,7 +7,7 @@
 class CRenderer
 {
   private:
-    int MARKER_SIZE; //The size of a marker displaying an organism
+    float MARKER_SIZE; //The size of a marker displaying an organism
 
     SDL_Window* window;     //Main Window
     SDL_Renderer* renderer; //Main Renderer

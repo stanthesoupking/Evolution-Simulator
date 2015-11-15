@@ -3,10 +3,12 @@
 CGame::CGame( CEngine* _engine ) {
     engine = _engine;
     renderer = engine->getRenderer();
-    
-    testOrganism = new COrganism( CVector3(128,128,0), new CColor(255,0,0) );
 
     world = new CWorld();
+
+    testOrganism = new COrganism( CVector3(128,128,0), new CColor(255,0,0) );
+    CStimulus* testStimulus = new SEnergyInRange( world );
+    testOrganism->addStimulus( testStimulus );
     world->addOrganism( testOrganism );
     
     cameraPos = CVector3(0,0,0);

@@ -1,7 +1,7 @@
 #include <CRenderer.h>
 
 CRenderer::CRenderer( SDL_Window* _window ) {
-    MARKER_SIZE = 16;
+    MARKER_SIZE = 16.0f;
 
     window = _window;
 
@@ -39,8 +39,8 @@ void CRenderer::renderOrganism( COrganism* organism, CVector3 cameraPos ) {
     CVector3 onScreenPosition = organism->position;
     onScreenPosition.displace( cameraPos );
         
-    SDL_Rect fillRect = { onScreenPosition.x-MARKER_SIZE/2, onScreenPosition.y-MARKER_SIZE/2,
-                          MARKER_SIZE, MARKER_SIZE };
+    SDL_Rect fillRect = { (int) (onScreenPosition.x-MARKER_SIZE/2.0f), (int) (onScreenPosition.y-MARKER_SIZE/2.0f),
+                          (int)MARKER_SIZE, (int)MARKER_SIZE };
 
     CColor* color = organism->getColor();    
     setRenderColor( color ); 

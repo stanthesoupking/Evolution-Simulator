@@ -1,22 +1,25 @@
 #include <CRenderer.h>
 
-CRenderer::CRenderer( SDL_Window* _window ) {
+#include "COrganism.h"
+#include <SDL2/SDL.h>
+
+CRenderer::CRenderer( SDL_Window* _window ):
+    grass_color (32, 160, 32),
+    window (_window)
+{
     MARKER_SIZE = 16.0f;
 
-    window = _window;
-
-	renderer = NULL;
+	renderer = nullptr;
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	if (renderer == NULL) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "SDL failed to create renderer.", NULL);
+	if (renderer == nullptr) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", "SDL failed to create renderer.", nullptr);
 		SDL_Quit();
 	}
 
-    grass_color = new CColor( 32,160,32 );
 }
 
-CRenderer::~CRenderer( void ) {
-	
+CRenderer::~CRenderer() {
+	delete renderer;
 }
 
 void CRenderer::clear() {
@@ -30,8 +33,8 @@ void CRenderer::present() {
     SDL_RenderPresent(renderer);
 }
 
-void CRenderer::setRenderColor( CColor* color ) {
-    SDL_SetRenderDrawColor( renderer, color->r, color->g, color->b, 0xFF );
+void CRenderer::setRenderColor( CColor color ) {
+    SDL_SetRenderDrawColor( renderer, color.r, color.g, color.b, 0xFF );
 }
 
 void CRenderer::renderOrganism( COrganism* organism, CVector3 cameraPos ) {
@@ -42,7 +45,7 @@ void CRenderer::renderOrganism( COrganism* organism, CVector3 cameraPos ) {
     SDL_Rect fillRect = { (int) (onScreenPosition.x-MARKER_SIZE/2.0f), (int) (onScreenPosition.y-MARKER_SIZE/2.0f),
                           (int)MARKER_SIZE, (int)MARKER_SIZE };
 
-    CColor* color = organism->getColor();    
+    CColor const &color = organism->getColor();    
     setRenderColor( color ); 
        
     SDL_RenderFillRect( renderer, &fillRect );

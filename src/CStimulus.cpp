@@ -1,35 +1,19 @@
 #include "CStimulus.h"
-
-CStimulus::CStimulus( CWorld* _world ) {
-    self = 0;
-    world = _world;
-}
+#include "CBehaviour.h"
 
 CStimulus::~CStimulus() {
-
-}
-
-void CStimulus::setOwner( COrganism* _self ) {
-    self = _self;
+	for (CBehaviour* behaviour: behaviours)
+		delete behaviour;
 }
 
 void CStimulus::addBehaviour( CBehaviour* behaviour ) {
-    behaviours->push_back(behaviour);
+    behaviours.push_back(behaviour);
 }
 
-void CStimulus::setParam() {
-    
-}
-
-bool CStimulus::isActive() {
-    return false;
-}
-
-void CStimulus::update() {
-    if ( isActive() ) {
-        for(int i = 0; i < behaviours->size(); i++) {
-            CBehaviour* behaviour = behaviours->at(i);
-            behaviour->perform( self );
-        }
+void CStimulus::update(CWorld* world) {
+    if ( isActive(world) ) 
+	{
+		for (CBehaviour* behaviour: behaviours)
+			behaviour->perform( self );
     }
 }

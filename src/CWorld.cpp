@@ -1,17 +1,17 @@
 #include "CWorld.h"
+#include "COrganism.h"
 
-CWorld::CWorld() {
-    organisms = new std::vector<COrganism*>();
-}
-
+// I am become death, destructor of worlds
 CWorld::~CWorld() {
-    delete organisms;
+	//C++11 iterator-based for loop
+    for (COrganism *each: organisms)
+		delete each;
 }
 
 void CWorld::addOrganism( COrganism* organism ) {
-    organisms->push_back(organism);
+    organisms.push_back(organism);
 }
 
-std::vector<COrganism*>* CWorld::getOrganisms() {
+std::vector<COrganism*>& CWorld::getOrganisms() {
     return organisms;
 }

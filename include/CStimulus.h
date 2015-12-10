@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
-#include "COrganism.h"
 
 //Forward Declaration:
+class COrganism;
 class CBehaviour;  
 class CWorld;
 //END
@@ -10,22 +10,22 @@ class CWorld;
 class CStimulus
 {
   public:
-    CStimulus( CWorld* _world );
+    CStimulus():
+	    self (nullptr), 
+        behaviours() {}
     ~CStimulus();
     
-    virtual void setParam();
+    virtual void setParam() {}
 
-    void setOwner( COrganism* _self );
+    void setOwner( COrganism* _self )
+	    {self = _self;}
 
-    virtual bool isActive();
-    void update();
+    virtual bool isActive(CWorld* world) 
+	    {return false;}
+    void update(CWorld* world);
 
     void addBehaviour( CBehaviour* behaviour );
     COrganism* self;
-    CWorld* world;
 
-    std::vector< CBehaviour* >* behaviours;
+    std::vector< CBehaviour* > behaviours;
 };
-
-#include "CBehaviour.h"
-#include "CWorld.h"

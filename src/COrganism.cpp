@@ -1,35 +1,18 @@
 #include "COrganism.h"
-
-COrganism::COrganism( CVector3 _position, CColor* _color ) {
-    position = _position;
-    color = _color;
-    
-    energy = 100;
-
-    stimuli = new std::vector< CStimulus* >();
-}
+#include "CStimulus.h"
 
 COrganism::~COrganism() {
-    
+    for (CStimulus* stimulus: stimuli)
+		delete stimulus;
 }
 
-void COrganism::update( double deltaTime ) {
+void COrganism::update( double deltaTime, CWorld* world ) {
     //Do organism actions here
-    for(int i = 0; i < stimuli->size(); i++) {
-        CStimulus* stimulus = stimuli->at(i);
-        stimulus->update();
-    }
-}
-
-CColor* COrganism::getColor() {
-    return color;
+	for (CStimulus* stimulus: stimuli)
+        stimulus->update(world);
 }
 
 void COrganism::addStimulus( CStimulus* stimulus ) {
     stimulus->setOwner(this);
-    stimuli->push_back(stimulus);
-}
-
-float COrganism::getEnergy() {
-    return energy;
+    stimuli.push_back(stimulus);
 }

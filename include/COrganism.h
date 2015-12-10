@@ -4,17 +4,23 @@
 #include "CVector3.h"
 
 class CStimulus; //Forward Declaration
+class CWorld;
 
 class COrganism
 {
   public:
-    COrganism( CVector3 _position, CColor* _color );
+    COrganism( CVector3 _position, CColor _color ):
+	    position(_position), color(_color), energy(100), stimuli()
+		{}
     ~COrganism();
-    void update( double deltaTime );
+    void update( double deltaTime, CWorld* world );
     
-    float getEnergy();
-    CColor* getColor();
-    void setColor( CColor* _color );
+    float getEnergy()
+    	{return energy;}
+    CColor getColor()
+	    {return color;}
+    void setColor( CColor _color )
+	    {color = _color;}
 
     CVector3 position;
 
@@ -22,9 +28,7 @@ class COrganism
   private:
     float energy;
     float health;
-    CColor* color;
+    CColor color;
 
-    std::vector< CStimulus* >* stimuli;
+    std::vector< CStimulus* > stimuli;
 };
-
-#include "CStimulus.h"

@@ -10,9 +10,11 @@
 class SEnergyInRange: public CStimulus
 {
   public:
+    SEnergyInRange ():
+      CStimulus () {}
     using CStimulus::CStimulus;
     void setParam( float _a, float _b );
-    bool isActive();
+    bool isActive(CWorld* world);
   private:
     float a, b;
 };

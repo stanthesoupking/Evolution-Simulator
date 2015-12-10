@@ -1,13 +1,20 @@
-#include "CGame.h"
+#include "CRenderer.h"
 
-CGame::CGame( CEngine* _engine ) {
-    engine = _engine;
-    renderer = engine->getRenderer();
+#include "CGame.h"
+#include "CEngine.h"
+#include "CWorld.h"
+#include "COrganism.h"
+#include "base_stimuli.h"
+
+CGame::CGame( CEngine* _engine ):
+    engine(_engine),
+    renderer(_engine->getRenderer())
+{
 
     world = new CWorld();
 
-    testOrganism = new COrganism( CVector3(128,128,0), new CColor(255,0,0) );
-    CStimulus* testStimulus = new SEnergyInRange( world );
+    testOrganism = new COrganism( CVector3(128,128,0), CColor(255,0,0) );
+    CStimulus* testStimulus = new SEnergyInRange();
     testOrganism->addStimulus( testStimulus );
     world->addOrganism( testOrganism );
     
@@ -19,7 +26,7 @@ CGame::CGame( CEngine* _engine ) {
 }
 
 CGame::~CGame() {
-    
+    delete world; 
 }
 
 void CGame::start() {
@@ -41,19 +48,19 @@ void CGame::update() {
 
     renderer->clear();
 
-    std::vector<COrganism*>* organisms = world->getOrganisms();
+    std::vector<COrganism*>& organisms = world->getOrganisms();
     
-    long cTime = SDL_GetTicks(); //TODO: Make this non-SDL dependant
+    long cTime = SDL_GetTicks(); //TODO: Make this non SDL-dependant
 
     double deltaTime = (pTime - cTime) / 1000.0; //Delta Time in Seconds
     pTime = cTime;
 
     //Do rendering
-    for(int i = 0; i < organisms->size(); i++) {
-        COrganism* organism = organisms->at(i);
-        organism->update(deltaTime);
+	for (COrganism* organism: organisms)
+	{
+        organism->update(deltaTime, world);
         renderer->renderOrganism(organism, cameraPos);
-    }
+	}
 
     renderer->present();
 }

@@ -8,8 +8,8 @@ class CEngine
 {
   public:
     CEngine( int sWidth, int sHeight, const char* title );
-    ~CEngine() = default;
-	CRenderer* getRenderer() 
+    ~CEngine();
+    CRenderer* getRenderer() 
         {return renderer;}
 
   private:

@@ -6,7 +6,7 @@
 int main( int argc, char* args[] )
 {
     CEngine* engine = new CEngine( 640, 480, "Evolution-Simulator" );
-    CRenderer* renderer = engine->getRenderer();
+    CRenderer& renderer = *engine->getRenderer();
     CGame* game = new CGame( engine );
 
     game->start();
@@ -17,7 +17,6 @@ int main( int argc, char* args[] )
     delete engine;
     delete game;
     SDL_Quit();
-	delete renderer;
 
     return 0;
 }

@@ -19,7 +19,7 @@ CRenderer::CRenderer( SDL_Window* _window ):
 }
 
 CRenderer::~CRenderer() {
-	delete renderer;
+    SDL_DestroyRenderer (renderer);
 }
 
 void CRenderer::clear() {

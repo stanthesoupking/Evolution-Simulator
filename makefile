@@ -7,7 +7,8 @@ CFLAGS=-I$(IDIR) -std=c++11
 SRC=src
 LDIR =lib
 
-LIBS=-lSDL2 -lstdc++
+#LIBS=-lSDL2 -lstdc++
+LIBS=$$(sdl2-config --libs) -lstdc++
 
 _DEPS = CEngine.h CRenderer.h CColor.h COrganism.h CGame.h CVector3.h CWorld.h CBehaviour.h CStimulus.h base_stimuli.h
 DEPS = $(patsubst %,$(SRC)/%,$(_DEPS))

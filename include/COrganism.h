@@ -1,30 +1,42 @@
 #pragma once
 #include <vector>
+
+#include "CStateMachine.h"
 #include "CColor.h"
 #include "CVector3.h"
 
-class CStimulus; //Forward Declaration
+class CWorld;
 
 class COrganism
 {
   public:
-    COrganism( CVector3 _position, CColor* _color );
-    ~COrganism();
-    void update( double deltaTime );
+    COrganism( CStateMachine const &_brain, stateId _state, CVector3 _position, CColor _color):
+        brain(_brain, _state),
+        position(_position), 
+        color(_color), 
+        energy(100.0f)
+        {}
+    ~COrganism() = default;
     
-    float getEnergy();
-    CColor* getColor();
-    void setColor( CColor* _color );
+    //maybe just make color public? it isn't likely to change from being in-line
+    CColor getColor()
+        {return color;}
+    void setColor( CColor _color )
+        {color = _color;}
 
     CVector3 position;
 
-    void addStimulus( CStimulus* stimulus );
+    //public member, because brain is mostly private anyway (COrganism is a friend)
+    CStateMachine brain;
+    
+    float getEnergy()
+        {return energy;}
+        
+    void act(double deltaTime, CWorld* world);
+
   private:
     float energy;
     float health;
-    CColor* color;
-
-    std::vector< CStimulus* >* stimuli;
+    CColor color;
+    
 };
-
-#include "CStimulus.h"

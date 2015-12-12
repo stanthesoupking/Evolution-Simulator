@@ -1,31 +1,18 @@
 #pragma once
 #include <vector>
-#include "COrganism.h"
 
 //Forward Declaration:
-class CBehaviour;  
 class CWorld;
+class COrganism;
 //END
 
 class CStimulus
 {
   public:
-    CStimulus( CWorld* _world );
-    ~CStimulus();
+    CStimulus() = default;
+    ~CStimulus() = default;
     
-    virtual void setParam();
-
-    void setOwner( COrganism* _self );
-
-    virtual bool isActive();
-    void update();
-
-    void addBehaviour( CBehaviour* behaviour );
-    COrganism* self;
-    CWorld* world;
-
-    std::vector< CBehaviour* >* behaviours;
+    virtual void setParam() {}
+    virtual bool isActive(COrganism* self, CWorld* world) = 0;
+    virtual CStimulus* newCopy() const = 0;
 };
-
-#include "CBehaviour.h"
-#include "CWorld.h"

@@ -1,35 +1,10 @@
 #include "COrganism.h"
 
-COrganism::COrganism( CVector3 _position, CColor* _color ) {
-    position = _position;
-    color = _color;
-    
-    energy = 100;
+#include "CBehaviour.h"
 
-    stimuli = new std::vector< CStimulus* >();
-}
-
-COrganism::~COrganism() {
-    
-}
-
-void COrganism::update( double deltaTime ) {
-    //Do organism actions here
-    for(int i = 0; i < stimuli->size(); i++) {
-        CStimulus* stimulus = stimuli->at(i);
-        stimulus->update();
-    }
-}
-
-CColor* COrganism::getColor() {
-    return color;
-}
-
-void COrganism::addStimulus( CStimulus* stimulus ) {
-    stimulus->setOwner(this);
-    stimuli->push_back(stimulus);
-}
-
-float COrganism::getEnergy() {
-    return energy;
+void COrganism::act(double deltaTime, CWorld* world) {
+    //get the current state, then its action, then do whatever that is
+    CBehaviour* action = brain.getState().action;
+    if (action)
+        action->perform(deltaTime, this);
 }

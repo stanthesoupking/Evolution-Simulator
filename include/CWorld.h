@@ -1,15 +1,18 @@
 #pragma once
 #include <vector>
-#include "COrganism.h"
+
+class COrganism;
 
 class CWorld
 {
   private:
-    std::vector<COrganism*>* organisms;
+    std::vector<COrganism*> organisms;
   public:
-    CWorld();
+    CWorld() = default;
     ~CWorld();
 
     void addOrganism( COrganism* organism );
-    std::vector<COrganism*>* getOrganisms();
+    
+    std::vector<COrganism*>& getOrganisms()
+        {return organisms;}
 };

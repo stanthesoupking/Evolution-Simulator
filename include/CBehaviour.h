@@ -1,13 +1,15 @@
 #pragma once
-#include "COrganism.h"
+
+class COrganism;
 
 class CBehaviour
 {
   private:
     
   public:
-    CBehaviour();
-    ~CBehaviour();
+    CBehaviour() = default;
+    ~CBehaviour() = default;
 
-    void perform( COrganism* self );
+    virtual void perform( double deltaTime, COrganism* self ) = 0;
+    virtual CBehaviour* newCopy() const = 0;
 };

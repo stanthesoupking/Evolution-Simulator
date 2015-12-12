@@ -12,5 +12,7 @@ class CWorld
     ~CWorld();
 
     void addOrganism( COrganism* organism );
-    std::vector<COrganism*>& getOrganisms();
+    
+    std::vector<COrganism*>& getOrganisms()
+        {return organisms;}
 };

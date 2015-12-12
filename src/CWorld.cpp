@@ -11,7 +11,3 @@ CWorld::~CWorld() {
 void CWorld::addOrganism( COrganism* organism ) {
     organisms.push_back(organism);
 }
-
-std::vector<COrganism*>& CWorld::getOrganisms() {
-    return organisms;
-}

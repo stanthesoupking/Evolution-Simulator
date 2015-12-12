@@ -1,25 +1,39 @@
 all: executable
 
-IDIR =include
 CC=gcc
 CFLAGS=-I$(IDIR) -std=c++11
-
-SRC=src
 LDIR =lib
 
-LIBS=-lSDL2 -lstdc++
+IDIR =include
+SRC=src
+ODIR=object
 
-_DEPS = CEngine.h CRenderer.h CColor.h COrganism.h CGame.h CVector3.h CWorld.h CBehaviour.h CStimulus.h base_stimuli.h
-DEPS = $(patsubst %,$(SRC)/%,$(_DEPS))
+LIBS=$(shell sdl2-config --libs) -lstdc++
 
-_OBJ = main.cpp CEngine.cpp CRenderer.cpp COrganism.cpp CColor.cpp CGame.cpp CVector3.cpp CWorld.cpp CBehaviour.cpp CStimulus.cpp base_stimuli.cpp
-OBJ = $(patsubst %,$(SRC)/%,$(_OBJ))
+# game objects and handlers
+WORLD = World Organism StateMachine Behaviour Stimulus Mutator
+# convenient data models for linking game objects to the renderer
+STRUCT = Vector3 Color
+# things that handle simple object containment, or SDL operations
+INTERFACE = Engine Renderer Game
+# things that don't start with C, i.e. files containing collections or int main(int, const char[]);
+MISC = main base_stimuli base_behaviours
 
+FULL = $(patsubst %,C%,$(WORLD) $(STRUCT) $(INTERFACE)) $(MISC)
+
+DEPS = $(patsubst %,$(IDIR)/%.h,$(FULL))
+#DEPS = $(FULL:%,$(IDIR)/%.h)
+
+CODE = $(patsubst %,$(SRC)/%.cpp,$(FULL))
+#CODE = $(FULL:%,$(SRC)/%.cpp)
+
+OBJ = $(patsubst %,$(SRC)/%.o,$(FULL))
+#OBJ = $(FULL:%,$(SRC)/%.cpp)
 
 $(ODIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-executable: $(OBJ)
+executable: $(CODE)
 	gcc -o $@ $^ $(CFLAGS) $(LIBS)
 
 .PHONY: clean

@@ -4,7 +4,8 @@
 #include "CEngine.h"
 #include "CWorld.h"
 #include "COrganism.h"
-#include "base_stimuli.h"
+#include "CMutator.h"
+#include "base_behaviours.h"
 
 CGame::CGame( CEngine* _engine ):
     engine(_engine),
@@ -13,9 +14,8 @@ CGame::CGame( CEngine* _engine ):
 
     world = new CWorld();
 
-    testOrganism = new COrganism( CVector3(128,128,0), CColor(255,0,0) );
-    CStimulus* testStimulus = new SEnergyInRange();
-    testOrganism->addStimulus( testStimulus );
+    COrganism* testOrganism = CMutator::newRockCreature( CVector3(128,128,0), CColor(255,0,0) );
+    CMutator::ReplaceBehaviour(testOrganism, 0, new Behaviour::WalkSouthEast());
     world->addOrganism( testOrganism );
     
     cameraPos = CVector3(0,0,0);
@@ -55,10 +55,14 @@ void CGame::update() {
     double deltaTime = (pTime - cTime) / 1000.0; //Delta Time in Seconds
     pTime = cTime;
 
+    //get everything to think without moving, so that there is no first-strike advantage
+    for (COrganism* organism: organisms)
+        organism->brain.think(deltaTime, organism, world);
+    
     //Do rendering
 	for (COrganism* organism: organisms)
 	{
-        organism->update(deltaTime, world);
+        organism->act(deltaTime, world);
         renderer->renderOrganism(organism, cameraPos);
 	}
 

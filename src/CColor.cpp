@@ -1,3 +1,3 @@
 #include "CColor.h"
 
-//all inline
+//all handled in-line by header

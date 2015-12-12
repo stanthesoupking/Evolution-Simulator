@@ -1,3 +1,3 @@
 #include "CBehaviour.h"
 
-//all inline
+//abstract class with no implementations

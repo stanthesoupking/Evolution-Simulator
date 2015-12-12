@@ -1,18 +1,10 @@
 #include "COrganism.h"
-#include "CStimulus.h"
 
-COrganism::~COrganism() {
-    for (CStimulus* stimulus: stimuli)
-		delete stimulus;
-}
+#include "CBehaviour.h"
 
-void COrganism::update( double deltaTime, CWorld* world ) {
-    //Do organism actions here
-	for (CStimulus* stimulus: stimuli)
-        stimulus->update(world);
-}
-
-void COrganism::addStimulus( CStimulus* stimulus ) {
-    stimulus->setOwner(this);
-    stimuli.push_back(stimulus);
+void COrganism::act(double deltaTime, CWorld* world) {
+    //get the current state, then its action, then do whatever that is
+    CBehaviour* action = brain.getState().action;
+    if (action)
+        action->perform(deltaTime, this);
 }

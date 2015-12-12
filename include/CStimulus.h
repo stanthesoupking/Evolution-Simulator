@@ -2,30 +2,17 @@
 #include <vector>
 
 //Forward Declaration:
-class COrganism;
-class CBehaviour;  
 class CWorld;
+class COrganism;
 //END
 
 class CStimulus
 {
   public:
-    CStimulus():
-	    self (nullptr), 
-        behaviours() {}
-    ~CStimulus();
+    CStimulus() = default;
+    ~CStimulus() = default;
     
     virtual void setParam() {}
-
-    void setOwner( COrganism* _self )
-	    {self = _self;}
-
-    virtual bool isActive(CWorld* world) 
-	    {return false;}
-    void update(CWorld* world);
-
-    void addBehaviour( CBehaviour* behaviour );
-    COrganism* self;
-
-    std::vector< CBehaviour* > behaviours;
+    virtual bool isActive(COrganism* self, CWorld* world) = 0;
+    virtual CStimulus* newCopy() const = 0;
 };

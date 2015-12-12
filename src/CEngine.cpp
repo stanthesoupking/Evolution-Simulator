@@ -14,6 +14,6 @@ CEngine::CEngine( int sWidth, int sHeight, const char* title )
 
 CEngine::~CEngine ()
 {
-    SDL_DestrowWindow(window);
-    delete CRenderer;
+    SDL_DestroyWindow(window);
+    delete renderer;
 }

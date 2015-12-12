@@ -2,8 +2,7 @@
 #include "CVector3.h"
 #include "CColor.h"
 
-class SDL_Window;
-class SDL_Renderer;
+#include <SDL2/SDL.h>
 
 class COrganism;
 

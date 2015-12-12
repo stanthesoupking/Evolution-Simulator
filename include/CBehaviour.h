@@ -10,5 +10,6 @@ class CBehaviour
     CBehaviour() = default;
     ~CBehaviour() = default;
 
-    virtual void perform( COrganism* self ) = 0;
+    virtual void perform( double deltaTime, COrganism* self ) = 0;
+    virtual CBehaviour* newCopy() const = 0;
 };

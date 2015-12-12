@@ -19,8 +19,6 @@ class CGame
     CEngine* engine;
     CRenderer* renderer;
     CWorld* world;
-    
-    COrganism* testOrganism;
 
     CVector3 cameraPos;
 

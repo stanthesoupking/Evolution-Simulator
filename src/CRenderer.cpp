@@ -1,7 +1,7 @@
 #include <CRenderer.h>
 
 #include "COrganism.h"
-#include <SDL2/SDL.h>
+
 
 CRenderer::CRenderer( SDL_Window* _window ):
     grass_color (32, 160, 32),

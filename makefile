@@ -8,6 +8,8 @@ IDIR =include
 SRC=src
 ODIR=object
 
+#if the shell command isn't available use something explicit like below
+#LIBS=-lsdl2 -lstdc++
 LIBS=$(shell sdl2-config --libs) -lstdc++
 
 # game objects and handlers
